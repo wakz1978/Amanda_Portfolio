@@ -1,0 +1,24 @@
+﻿Age,Age in years
+Attrition (Assessment 3 only),"Whether the employee left during the last year (Yes/No)"
+BusinessTravel,"Business travel frequency (Non-Travel, Travel_Frequently, Travel_Rarely)"
+Department,"Department (Human Resources, Research & Development, Sales)"
+DistanceFromHome,Number of kms from home to work
+Education,"Highest level of education: 1=High School, 2=Diploma, 3=Bachelor, 4=Masters, 5=PhD"
+EnvironmentSatisfaction,"Satisfaction with work environment: 1=Low, 2=Medium, 3=High, 4=Very high"
+Gender,Male/Female
+JobInvolvement,"1=Not engaged, 2=Somewhat not engaged, 3=Somewhat engaged, 4=Engaged"
+JobRole,"Healthcare Representative, Human Resources, Laboratory Technician, Manager, Manufacturing Director, Research Director, Research Scientist, Sales Executive, Sales Representative"
+MaritalStatus,Divorced/Married/Single
+MonthlyIncome,Monthly net pay ($)
+NumCompaniesWorked,Number of other companies worked for
+OverTime,Whether normally work overtime (Yes/No)
+PerformanceRating,"1=Low, 2=Medium, 3=High, 4=Very high"
+RelationshipSatisfaction,"Satisfaction with work colleagues: 1=Low, 2=Medium, 3=High, 4=Very high"
+StockOptionLevel,"Stock option levels in company: 0=None, 1=Some, 2=High, 3=Very high"
+TotalWorkingYears,Number of years at work (all jobs)
+TrainingTimesLastYear,Training days in last year
+WorkLifeBalance,"1=Bad, 2=Satisfactory, 3=Good, 4=Very good"
+YearsAtCompany,Number of years at company
+YearsInCurrentRole,Number of years in current role
+YearsSinceLastPromotion,Number of years since last promotion
+YearsWithCurrManager,Number of years with current manager
