@@ -1,4 +1,4 @@
-# Amanda Wright Portfolio
+# Amanda Wright Data Analyst Portfolio
 
 Graduate of Macquarie University(2003) and University of New South Wales(2024) in Sydney, Australia.
 
