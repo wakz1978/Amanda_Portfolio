@@ -336,7 +336,7 @@ colnames(income_by_workbalance) <- c("WorkLifeBalance","MedianMonthlyIncome")
 
 #Order the Table of work_life_by_job from highest to lowest income
 worklife_by_job <- worklife_by_job[,income_by_job$JobRole[order(income_by_job$MonthlyIncome)]]
-9worklife_by_job
+worklife_by_job
 
 # Create parameters for plots
 par(
