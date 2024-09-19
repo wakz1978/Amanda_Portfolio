@@ -3,11 +3,11 @@ library(writexl)
 suppressMessages(library(pROC))
 
 #Import data files
-employees <- read.csv('employees2.csv', stringsAsFactors = T)
+employees <- read.csv('employees2.csv', stringsAsFactors = TRUE)
 dictionary <- read.csv('Dictionary.csv', header = FALSE, col.names = c('SurveyQuestion', 'QuestionDetail'))
 
 # Write Dictionary to an excel file for report
-write_xlsx(dictionary,'Dictionary.xlsx')
+write_xlsx(dictionary, 'Dictionary.xlsx')
 
 # Set parameters for plots
 par(
@@ -19,11 +19,11 @@ par(
 
 # Create a barplot of employees that have left and stayed
 mids <- barplot(table(employees$Attrition),
-        main = "Number of Employees Who Have Left Globex \n Since 2023 Employee Survey",
-        ylim = c(0,1000),
-        col = c("lightblue", "indianred1"),
-        las = 1,
-        names.arg = c("Stayed", "Left")
+  main = "Number of Employees Left Globex \n Since 2023 Employee Survey",
+  ylim = c(0, 1000),
+  col = c("lightblue", "indianred1"),
+  las = 1,
+  names.arg = c("Stayed", "Left")
 )
 
 # Place count data of number employees who haveleft and stayed on the bars
@@ -41,12 +41,12 @@ par(
 
 # Create a barplot of Overtime in the organisaton
 mids2 <- barplot(
-    table(employees$OverTime),
-    main = "Overtime at Globex",
-    ylim = c(0,1000),
-    col = c("lightblue", "indianred1"),
-    las = 1,
-    names.arg = c("No", "Yes")
+  table(employees$OverTime),
+  main = "Overtime at Globex",
+  ylim = c(0, 1000),
+  col = c("lightblue", "indianred1"),
+  las = 1,
+  names.arg = c("No", "Yes")
 )
 
 # create labels of number of employees on bars
@@ -54,16 +54,16 @@ text(
   x = mids2,
   y = table(employees$OverTime),
   labels = table(employees$OverTime),
-  pos = 3)
+  pos = 3
+)
 
-write_xlsx(income_by_job[order(income_by_job$MonthlyIncome),],'MonthlyMedianIncome.xlsx')
+write_xlsx(income_by_job[order(income_by_job$MonthlyIncome),],'MonthlyMedianIncome.xlsx') # nolint
 
 #Create data of employees Working Years less than 3 years
-junior_employees <- aggregate(
-  Department ~ TotalWorkingYears,
-  data = employees[employees$TotalWorkingYears < 3,],
-  FUN = length)
-junior_employees
+junior_employees <- aggregate(Department ~ TotalWorkingYears,
+  data = employees[employees$TotalWorkingYears < 3, ],
+  FUN = length
+) junior_employees
 
 # Create Plot of number of mployees in Yerars 1 - 3
 mids6 <- barplot(
@@ -74,19 +74,20 @@ mids6 <- barplot(
   ylab = "Number of Employees",
   xlab = "",
   las = 1
-  )
+)
 
 # Create labels
 text(
   x = mids6,
   y = junior_employees$Department,
   labels = junior_employees$Department,
-  pos = 3)
+  pos = 3
+)
 
 # Create data for Attrition By Role Employees less than 3 years
-junior_employees2 <- prop.table(
-  table(junior_employees_info$Attrition, junior_employees_info$JobRole),
-  margin = 2)
+junior_employees2 <- prop.table
+(table(junior_employees_info$Attrition, junior_employees_info$JobRole),
+margin = 2)
 
 junior_employees2 <- junior_employees2[,colnames(junior_employees2) %in% c("Human Resources", "Sales Representative", "Laboratory Technician", "Research Scientist")]
 junior_employees2 <- junior_employees2[,order(junior_employees2[2,])]
