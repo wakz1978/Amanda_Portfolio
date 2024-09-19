@@ -60,11 +60,10 @@ text(
 write_xlsx(income_by_job[order(income_by_job$MonthlyIncome),],'MonthlyMedianIncome.xlsx') # nolint
 
 #Create data of employees Working Years less than 3 years
-junior_employees <- aggregate
-(Department ~ TotalWorkingYears,
-data = employees[employees$TotalWorkingYears < 3, ],
-FUN = length)
-junior_employees
+junior_employees <- aggregate(Department ~ TotalWorkingYears,
+  data = employees[employees$TotalWorkingYears < 3, ],
+  FUN = length
+) junior_employees
 
 # Create Plot of number of mployees in Yerars 1 - 3
 mids6 <- barplot(
