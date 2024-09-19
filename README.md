@@ -1,10 +1,10 @@
-As a dedicated data analyst with a background in retail, I bring a unique perspective to data interpretation and insights. 
+# Amanda Wright Portfolio
 
-Graduate of Macquarie University and University of New South Wales in Sydney, Australia.
+Graduate of Macquarie University(2003) and University of New South Wales(2024) in Sydney, Australia.
 
-My projects focus on SQL, Python, Tableau and Azure Synapse Analytics.
+As a dedicated data analyst with a background in retail, I bring a unique perspective to data interpretation and insights.
 
-Balancing my professional life with being a mother I understand the importance of making informed decisions that impact both work and family.
+My projects in this portfolio focus on SQL, Python, Tableau, R and Azure Synapse Analytics.
 
 Born in New Zealand, schooled in Hong Kong and Kobe, Japan, living in Australia since 1996, others find my perspective to be global and unique.
 
