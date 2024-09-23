@@ -2,9 +2,13 @@
 library(writexl)
 suppressMessages(library(pROC))
 
+filepath1 <- "EmployeeRetentionPredictiveAnalytics(R)\\employees2.csv"
+
+filepath2 <- "EmployeeRetentionPredictiveAnalytics(R)\\dictionary.csv"
+
 #Import data files
-employees <- read.csv('employees2.csv', stringsAsFactors = TRUE)
-dictionary <- read.csv('Dictionary.csv', header = FALSE, col.names = c('SurveyQuestion', 'QuestionDetail'))
+employees <- read.csv(filepath1, stringsAsFactors = TRUE)
+dictionary <- read.csv(filepath2, header = FALSE, col.names = c('SurveyQuestion', 'QuestionDetail'))
 
 # Write Dictionary to an excel file for report
 write_xlsx(dictionary, 'Dictionary.xlsx')
@@ -31,7 +35,8 @@ text(
   x = mids,
   y = table(employees$Attrition),
   labels = table(employees$Attrition),
-  pos = 3)
+  pos = 3
+)
 
 # Specify the margins: bottom, left, top, right
 par(
@@ -57,15 +62,13 @@ text(
   pos = 3
 )
 
-write_xlsx(income_by_job[order(income_by_job$MonthlyIncome),],'MonthlyMedianIncome.xlsx') # nolint
-
 #Create data of employees Working Years less than 3 years
 junior_employees <- aggregate(Department ~ TotalWorkingYears,
   data = employees[employees$TotalWorkingYears < 3, ],
   FUN = length
-) junior_employees
+)
 
-# Create Plot of number of mployees in Yerars 1 - 3
+# Create Plot of number of mployees in Years 1 - 3
 mids6 <- barplot(
   junior_employees$Department ~ junior_employees$TotalWorkingYears,
   main = "WorkingYears <3 @ Globex \n",
@@ -85,9 +88,10 @@ text(
 )
 
 # Create data for Attrition By Role Employees less than 3 years
-junior_employees2 <- prop.table
-(table(junior_employees_info$Attrition, junior_employees_info$JobRole),
-margin = 2)
+junior_employees2 <- prop.table(
+  table(junior_employees$Attrition, junior_employees$JobRole),
+  margin = 2
+)
 
 junior_employees2 <- junior_employees2[,colnames(junior_employees2) %in% c("Human Resources", "Sales Representative", "Laboratory Technician", "Research Scientist")]
 junior_employees2 <- junior_employees2[,order(junior_employees2[2,])]
@@ -105,7 +109,7 @@ mids3 <- barplot(
   col = c("lightblue2", "indianred1"),
   las = 1,
   beside = T,
-  ylim = c(0,.8),
+  ylim = c(0, 0.8),
   cex.lab = 1
 )
 
@@ -114,13 +118,14 @@ text(
   x = mids3,
   y = junior_employees2,
   labels = paste(round(junior_employees2,2) * 100, "%"),
-  pos = 3)
+  pos = 3
+)
 
 # Create a legend
 legend(
   # Put at the top
   "topright",
-  xpd = T,
+  xpd = TRUE,
   inset = c(-.1, 0),
   # Specify the labels in the legend
   legend = c("Stayed", "Left"),
