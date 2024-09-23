@@ -3,8 +3,12 @@ library(writexl)
 suppressMessages(library(pROC))
 
 #Import data files
-employees <- read.csv('EmployeeRetentionPredictiveAnalytics(R)/employees2.csv', stringsAsFactors = TRUE)
-dictionary <- read.csv('EmployeeRetentionPredictiveAnalytics(R)/Dictionary.csv', header = FALSE, col.names = c('SurveyQuestion', 'QuestionDetail'))
+filepath1 <- c('EmployeeRetentionPredictiveAnalytics(R)/employees2.csv')
+filepath2 <- c('EmployeeRetentionPredictiveAnalytics(R)/Dictionary.csv')
+
+employees <- read.csv(filepath1, stringsAsFactors = TRUE)
+col_names <- c('SurveyQuestion', 'QuestionDetail')
+dictionary <- read.csv(filepath2, header = FALSE, col.names = col_names)
 
 # Write Dictionary to an excel file for report
 write_xlsx(dictionary, 'Dictionary.xlsx')
@@ -92,7 +96,8 @@ text(
 )
 
 # Create data for Attrition By Role Employees less than 3 years
-junior_employees2 <- prop.table(table(junior_employees_info$Attrition, junior_employees_info$JobRole),
+junior_employees2 <- prop.table(
+  table(junior_employees_info$Attrition, junior_employees_info$JobRole),
 margin = 2)
 
 junior_employees2 <- junior_employees2[,colnames(junior_employees2) %in% c("Human Resources", "Sales Representative", "Laboratory Technician", "Research Scientist")]
