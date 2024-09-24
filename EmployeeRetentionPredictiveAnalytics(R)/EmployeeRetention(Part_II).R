@@ -2,9 +2,9 @@
 library(writexl)
 suppressMessages(library(pROC))
 
-filepath1 <- "EmployeeRetentionPredictiveAnalytics(R)\\employees2.csv"
+filepath1 <- "../Datasets/employees2.csv"
 
-filepath2 <- "EmployeeRetentionPredictiveAnalytics(R)\\dictionary.csv"
+filepath2 <- "../Datasets/dictionary.csv"
 
 #Import data files
 <<<<<<< HEAD:EmployeeRetentionPredictiveAnalytics(R)/EmployeeRetentionPredictiveAnalytics.R
