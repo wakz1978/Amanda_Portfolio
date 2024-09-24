@@ -10,14 +10,7 @@ filepath2 <- "../Datasets/dictionary.csv"
 <<<<<<< HEAD:EmployeeRetentionPredictiveAnalytics(R)/EmployeeRetentionPredictiveAnalytics.R
 employees <- read.csv(filepath1, stringsAsFactors = TRUE)
 dictionary <- read.csv(filepath2, header = FALSE, col.names = c('SurveyQuestion', 'QuestionDetail'))
-=======
-filepath1 <- c('EmployeeRetentionPredictiveAnalytics(R)/employees2.csv')
-filepath2 <- c('EmployeeRetentionPredictiveAnalytics(R)/Dictionary.csv')
 
-employees <- read.csv(filepath1, stringsAsFactors = TRUE)
-col_names <- c('SurveyQuestion', 'QuestionDetail')
-dictionary <- read.csv(filepath2, header = FALSE, col.names = col_names)
->>>>>>> 282441debed815f47ca3b814721f0e6019e4c619:EmployeeRetentionPredictiveAnalytics(R)/EmployeeRetention(Part_II).R
 
 # Write Dictionary to an excel file for report
 write_xlsx(dictionary, 'Dictionary.xlsx')
