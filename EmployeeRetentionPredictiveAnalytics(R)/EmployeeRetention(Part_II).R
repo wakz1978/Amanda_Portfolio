@@ -2,18 +2,18 @@
 library(writexl)
 suppressMessages(library(pROC))
 
-filepath1 <- "../Datasets/employees2.csv"
 
-filepath2 <- "../Datasets/dictionary.csv"
 
 #Import data files
+filepath1 <- "Datasets/employees2.csv"
+filepath2 <- "Datasets/dictionary.csv"
 
 employees <- read.csv(filepath1, stringsAsFactors = TRUE)
 dictionary <- read.csv(filepath2, header = FALSE, col.names = c('SurveyQuestion', 'QuestionDetail'))
 
 
 # Write Dictionary to an excel file for report
-write_xlsx(dictionary, '../Datasets/Dictionary.xlsx')
+write_xlsx(dictionary, 'Datasets/Dictionary.xlsx')
 
 # Set parameters for plots
 par(
@@ -33,7 +33,7 @@ mids <- barplot(table(employees$Attrition),
   names.arg = c("Stayed", "Left")
 )
 
-# Place count data of number employees who haveleft and stayed on the bars
+# Place count data of number employees who have left and stayed on the bars
 text(
   x = mids,
   y = table(employees$Attrition),
@@ -41,9 +41,7 @@ text(
   pos = 3
 )
 
-
-
-# Create a barplot of Overtime in the organisaton
+# Create a barplot of Overtime in the organisation
 mids2 <- barplot(
   table(employees$OverTime),
   main = "Overtime at Globex",
@@ -61,13 +59,6 @@ text(
   pos = 3
 )
 
-#Create data of employees Working Years less than 3 years
-junior_employees <- aggregate(Department ~ TotalWorkingYears,
-  data = employees[employees$TotalWorkingYears < 3, ],
-  FUN = length
-)
-
-# Create Plot of number of mployees in Years 1 - 3
 
 # Calculate the median income for each job role
 income_by_job <- aggregate(
@@ -76,20 +67,18 @@ income_by_job <- aggregate(
   FUN = median
 )
 
-write_xlsx(income_by_job[order(income_by_job$MonthlyIncome),],'../Datasets/MonthlyMedianIncome.xlsx') # nolint
+write_xlsx(income_by_job[order(income_by_job$MonthlyIncome),],'Datasets/MonthlyMedianIncome.xlsx') # nolint
 
 #Create data of employees Working Years less than 3 years
-junior_employees <- aggregate(Department ~ TotalWorkingYears,
-  data = employees[employees$TotalWorkingYears < 3, ],
+
+
+# Create Plot of number of employees in Years 1 - 3
+junior_employees_info <- aggregate(
+  Department ~ TotalWorkingYears,    employees[employees$TotalWorkingYears < 3,], 
   FUN = length)
 
-junior_employees_info <- subset(employees, employees$TotalWorkingYears<3)
-junior_employees_info
-
-# Create Plot of number of employees in Yerars 1 - 3
-
 mids6 <- barplot(
-  junior_employees$Department ~ junior_employees$TotalWorkingYears,
+  junior_employees_info$Department ~ junior_employees_info$TotalWorkingYears,
   main = "WorkingYears <3 @ Globex \n",
   col = c("lightblue2", "dodgerblue","cadetblue"),
   names.arg = c("First Year", "Second Year", "Third Year"),
@@ -102,19 +91,19 @@ mids6 <- barplot(
 # Create labels
 text(
   x = mids6,
-  y = junior_employees$Department,
-  labels = junior_employees$Department,
+  y = junior_employees_info$Department,
+  labels = junior_employees_info$Department,
   pos = 3
 )
 
 # Create data for Attrition By Role Employees less than 3 years
-junior_employees2 <- subset(employees, employees$TotalWorkingYears < 3 & employees$Attrition == 'Yes')
+junior_employee_info <- subset(employees, employees$TotalWorkingYears <3)
 
-junior_employees2 <- junior_employees2[,colnames(junior_employees2) %in% c("Human Resources", "Sales Representative", "Laboratory Technician", "Research Scientist")]
+junior_employees2 <- prop.table(
+  table(junior_employee_info$Attrition, junior_employee_info$JobRole), 
+  margin = 2)
 
-junior_employees2
-
-junior_employees2 <- junior_employees2[,order(junior_employees2[2,])]
+junior_employees2 <- junior_employees2[, colnames(junior_employees2) %in% c('Sales Representative', 'Research Scientist', 'Labratory Technician', 'Human Resources')]
 
 par(mar = c(3, 1, 3, 3))
 
@@ -127,8 +116,7 @@ mids3 <- barplot(
   col = c("lightblue2", "indianred1"),
   las = 1,
   beside = T,
-  ylim = c(0, 0.8),
-  cex.lab = 1,
+  cex.lab = .7,
   ylim = c(0,1.2),
   cex.lab = .7,
   cex.names = .6
@@ -159,14 +147,10 @@ legend(
   cex = 0.7
 )
 
-median(employees$MonthlyIncome)
-
-junior_wages <- subset(employees, employees$TotalWorkingYears < 3)
-
-median(junior_wages$MonthlyIncome)
-
 # Create data for Attrition By Business Treval
 travel_vs_leavers <- prop.table(table(employees$Attrition, employees$BusinessTravel), margin = 2)
+
+
 travel_vs_leavers <- travel_vs_leavers[,order(travel_vs_leavers[2,])]
 
 par(
@@ -181,7 +165,7 @@ mids4 <- barplot(
   yaxt = "n",
   width = c(10,9),
   col = c("lightblue", "indianred1"),
-  ylim = c(0,1),
+  ylim = c(0,1.2),
   main = "Percentage of Employees Left By Business Travel"
 )
 
