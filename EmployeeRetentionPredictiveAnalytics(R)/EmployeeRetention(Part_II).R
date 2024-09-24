@@ -7,13 +7,13 @@ filepath1 <- "../Datasets/employees2.csv"
 filepath2 <- "../Datasets/dictionary.csv"
 
 #Import data files
-<<<<<<< HEAD:EmployeeRetentionPredictiveAnalytics(R)/EmployeeRetentionPredictiveAnalytics.R
+
 employees <- read.csv(filepath1, stringsAsFactors = TRUE)
 dictionary <- read.csv(filepath2, header = FALSE, col.names = c('SurveyQuestion', 'QuestionDetail'))
 
 
 # Write Dictionary to an excel file for report
-write_xlsx(dictionary, 'Dictionary.xlsx')
+write_xlsx(dictionary, '../Datasets/Dictionary.xlsx')
 
 # Set parameters for plots
 par(
@@ -61,7 +61,6 @@ text(
   pos = 3
 )
 
-<<<<<<< HEAD:EmployeeRetentionPredictiveAnalytics(R)/EmployeeRetentionPredictiveAnalytics.R
 #Create data of employees Working Years less than 3 years
 junior_employees <- aggregate(Department ~ TotalWorkingYears,
   data = employees[employees$TotalWorkingYears < 3, ],
@@ -69,7 +68,7 @@ junior_employees <- aggregate(Department ~ TotalWorkingYears,
 )
 
 # Create Plot of number of mployees in Years 1 - 3
-=======
+
 # Calculate the median income for each job role
 income_by_job <- aggregate(
   MonthlyIncome ~ JobRole,
@@ -77,7 +76,7 @@ income_by_job <- aggregate(
   FUN = median
 )
 
-write_xlsx(income_by_job[order(income_by_job$MonthlyIncome),],'MonthlyMedianIncome.xlsx') # nolint
+write_xlsx(income_by_job[order(income_by_job$MonthlyIncome),],'../Datasets/MonthlyMedianIncome.xlsx') # nolint
 
 #Create data of employees Working Years less than 3 years
 junior_employees <- aggregate(Department ~ TotalWorkingYears,
@@ -88,7 +87,7 @@ junior_employees_info <- subset(employees, employees$TotalWorkingYears<3)
 junior_employees_info
 
 # Create Plot of number of employees in Yerars 1 - 3
->>>>>>> 282441debed815f47ca3b814721f0e6019e4c619:EmployeeRetentionPredictiveAnalytics(R)/EmployeeRetention(Part_II).R
+
 mids6 <- barplot(
   junior_employees$Department ~ junior_employees$TotalWorkingYears,
   main = "WorkingYears <3 @ Globex \n",
@@ -96,7 +95,7 @@ mids6 <- barplot(
   names.arg = c("First Year", "Second Year", "Third Year"),
   ylab = "Number of Employees",
   xlab = "",
-  ylim = c(0,60),
+  ylim = c(0,70),
   las = 1
 )
 
@@ -109,17 +108,12 @@ text(
 )
 
 # Create data for Attrition By Role Employees less than 3 years
-junior_employees2 <- prop.table(
-<<<<<<< HEAD:EmployeeRetentionPredictiveAnalytics(R)/EmployeeRetentionPredictiveAnalytics.R
-  table(junior_employees$Attrition, junior_employees$JobRole),
-  margin = 2
-)
-=======
-  table(junior_employees_info$Attrition, junior_employees_info$JobRole),
-margin = 2)
->>>>>>> 282441debed815f47ca3b814721f0e6019e4c619:EmployeeRetentionPredictiveAnalytics(R)/EmployeeRetention(Part_II).R
+junior_employees2 <- subset(employees, employees$TotalWorkingYears < 3 & employees$Attrition == 'Yes')
 
 junior_employees2 <- junior_employees2[,colnames(junior_employees2) %in% c("Human Resources", "Sales Representative", "Laboratory Technician", "Research Scientist")]
+
+junior_employees2
+
 junior_employees2 <- junior_employees2[,order(junior_employees2[2,])]
 
 par(mar = c(3, 1, 3, 3))
@@ -133,14 +127,11 @@ mids3 <- barplot(
   col = c("lightblue2", "indianred1"),
   las = 1,
   beside = T,
-<<<<<<< HEAD:EmployeeRetentionPredictiveAnalytics(R)/EmployeeRetentionPredictiveAnalytics.R
   ylim = c(0, 0.8),
-  cex.lab = 1
-=======
+  cex.lab = 1,
   ylim = c(0,1.2),
   cex.lab = .7,
   cex.names = .6
->>>>>>> 282441debed815f47ca3b814721f0e6019e4c619:EmployeeRetentionPredictiveAnalytics(R)/EmployeeRetention(Part_II).R
 )
 
 # Create labels for plot
@@ -148,13 +139,10 @@ text(
   x = mids3,
   y = junior_employees2,
   labels = paste(round(junior_employees2,2) * 100, "%"),
-<<<<<<< HEAD:EmployeeRetentionPredictiveAnalytics(R)/EmployeeRetentionPredictiveAnalytics.R
-  pos = 3
-)
-=======
   pos = 3,
-  cex = 0.7)
->>>>>>> 282441debed815f47ca3b814721f0e6019e4c619:EmployeeRetentionPredictiveAnalytics(R)/EmployeeRetention(Part_II).R
+  cex = 0.7
+)
+
 
 # Create a legend
 legend(
