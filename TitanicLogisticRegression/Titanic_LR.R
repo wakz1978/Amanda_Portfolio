@@ -6,9 +6,18 @@ library("reghelper")
 library(pROC)
 #------------------------------------------------------------------- 
 # Import data 
-# SY has run a cold calling campaign a month ago. 
-# From this campaign you are provided a rich dataset that contains 
-# information about a random set of existing SY clients (sample size: 4140). 
+# Data Dictionary
+# Variable	Definition	Key
+# survival	Survival	0 = No, 1 = Yes
+# pclass	Ticket class	1 = 1st, 2 = 2nd, 3 = 3rd
+# sex	Sex	
+# Age	Age in years	
+# sibsp	# of siblings / spouses aboard the Titanic	
+# parch	# of parents / children aboard the Titanic	
+# ticket	Ticket number	
+# fare	Passenger fare	
+# cabin	Cabin number	
+# embarked	Port of Embarkation	C = Cherbourg, Q = Queenstown, S = Southampton
 #------------------------------------------------------------------- 
 
 # Pull data from the csv file 
